@@ -1,5 +1,6 @@
 import {
   isRouteErrorResponse,
+  Link,
   Links,
   Meta,
   Outlet,
@@ -10,6 +11,9 @@ import {
 import type { Route } from "./+types/root";
 import "./app.css";
 import Providers from "./providers";
+import { routeConfig } from "./config/route-config";
+import Navbar from "./components/shared/navbar";
+import Footer from "./components/shared/footer";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -51,30 +55,45 @@ export default function App() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  const isDevelopment = import.meta.env.DEV;
   let message = "Oops!";
   let details = "An unexpected error occurred.";
   let stack: string | undefined;
 
   if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? "404" : "Error";
+    message = error.status === 404 ? "404," : "Error";
     details =
-      error.status === 404
-        ? "The requested page could not be found."
-        : error.statusText || details;
+      error.status === 404 ? "Page not found" : error.statusText || details;
   } else if (import.meta.env.DEV && error && error instanceof Error) {
     details = error.message;
     stack = error.stack;
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
+    <main className="flex flex-col pt-16 bg-[#0f0f0f] text-white h-dvh min-h-fit">
+      <Navbar initBg="bg-[#0f0f0f]" />
+      <div className="container mx-auto flex flex-col gap-8 max-h-dvh py-20 px-6">
+        <div className="flex flex-row lg:flex-col uppercase text-[40px] font-medium tracking-tighter leading-tight lg:text-[56px] xl:text-[64px] gap-2 lg:gap-0">
+          <h1>{message}</h1>
+          <p>{details}</p>
+        </div>
+        <div className="uppercase underline underline-offset-4 text-sm">
+          <Link to={routeConfig.HOME.href}>Return home</Link>
+        </div>
+        <div className="h-3/4 mt-6 mb-20">
+          <img
+            src="https://framerusercontent.com/images/BcqcmnqSJiqE5oGWPFLwDyN5M.jpg"
+            alt="error"
+            className="h-full w-full object-cover"
+          />
+        </div>
+        {isDevelopment && stack && (
+          <pre className="w-full p-4 overflow-x-auto">
+            <code>{stack}</code>
+          </pre>
+        )}
+      </div>
+      <Footer initBg="bg-[#0f0f0f]" />
     </main>
   );
 }

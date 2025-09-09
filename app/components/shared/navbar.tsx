@@ -7,7 +7,11 @@ import ServiceLogo from "./service-logo";
 import { motion } from "motion/react";
 import { cn } from "~/lib/utils";
 
-export default function Navbar() {
+interface NavbarProps {
+  initBg?: string;
+}
+
+export default function Navbar({ initBg }: NavbarProps) {
   const hasBg = useNavbarBgOnSection({
     sectionId: "archives-section",
     offset: -200,
@@ -19,7 +23,8 @@ export default function Navbar() {
       id="site-header"
       className={cn(
         `overflow-hidden px-6 py-5 fixed top-0 z-50 w-full duration-500 `,
-        menuOpen ? "bg-background" : hasBg ? "bg-background" : "bg-transparent"
+        menuOpen ? "bg-background" : hasBg ? "bg-background" : "bg-transparent",
+        initBg
       )}
       initial={{ height: 96 }}
       animate={{ height: menuOpen ? "100vh" : 96 }}

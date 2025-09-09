@@ -84,7 +84,11 @@ export default function Navbar({ initBg }: NavbarProps) {
         <ul className="flex flex-col gap-2 p-5 uppercase">
           {appConfig.navItems.map(({ label, href }) => (
             <li key={href} className="text-5xl font-medium">
-              <Link to={href} prefetch="viewport">
+              <Link
+                to={href}
+                prefetch="viewport"
+                onClick={() => setMenuOpen(false)}
+              >
                 {label}
               </Link>
             </li>

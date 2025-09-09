@@ -52,7 +52,11 @@ export default function ProfileRoute() {
                 <h3 className="uppercase text-[#a6a6a6]">Socials</h3>
                 <div className="flex flex-col font-medium">
                   {mockConfig.profileData.social.map(({ href, label }) => (
-                    <Link to={href} className="hover-text-muted-foreground">
+                    <Link
+                      key={label}
+                      to={href}
+                      className="hover-text-muted-foreground"
+                    >
                       {label}
                     </Link>
                   ))}

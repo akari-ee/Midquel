@@ -22,7 +22,7 @@ export default function ArchivesSection() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 gap-y-8 pb-16">
         {mockConfig.archivesData.map((item) => (
-          <ArchiveCard item={item} />
+          <ArchiveCard item={item} key={item.Slug} />
         ))}
       </div>
       <Link

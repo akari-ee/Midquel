@@ -1,5 +1,5 @@
 import { appConfig } from "~/config/app-config";
-import BlurScaleOnScroll from "~/components/blur-scale-on-scroll";
+import BlurScaleOnScroll from "~/components/animation/blur-scale-on-scroll";
 import type { Route } from "./+types/_layout._index";
 import FilmSection from "~/components/film/film-section";
 import ArchivesSection from "~/components/archives/archives-section";

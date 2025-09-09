@@ -4,6 +4,11 @@ import type { Route } from "./+types/_layout._index";
 import FilmSection from "~/components/film/film-section";
 import ArchivesSection from "~/components/archives/archives-section";
 
+export const handle = {
+  navTargetSectionId: "archives-section",
+  navOffset: -200,
+};
+
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "New React Router App" },

@@ -2,11 +2,12 @@ import { Link } from "react-router";
 import { mockConfig } from "~/config/mock-config";
 import { routeConfig } from "~/config/route-config";
 import ArchiveCard from "./archive-card";
+import { handle } from "~/routes/_layout._index";
 
 export default function ArchivesSection() {
   return (
     <section
-      id="archives-section"
+      id={handle.navTargetSectionId}
       className="w-full h-fit flex flex-col gap-5 pb-20"
     >
       <div className="flex justify-between items-end uppercase w-full py-1">

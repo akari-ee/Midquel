@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useMatches } from "react-router";
 import { appConfig } from "~/config/app-config";
 import { format } from "date-fns";
 import { useNavbarBgOnSection } from "~/hooks/useNavbarBgOnSection";
@@ -12,9 +12,15 @@ interface NavbarProps {
 }
 
 export default function Navbar({ initBg }: NavbarProps) {
+  const matches = useMatches();
+  const activeHandle = (matches[matches.length - 1]?.handle ?? {}) as {
+    navTargetSectionId?: string;
+    navOffset?: number;
+  };
+
   const hasBg = useNavbarBgOnSection({
-    sectionId: "archives-section",
-    offset: -200,
+    sectionId: activeHandle.navTargetSectionId ?? "archives-section",
+    offset: activeHandle.navOffset ?? -200,
   });
   const [menuOpen, setMenuOpen] = useState(false);
 

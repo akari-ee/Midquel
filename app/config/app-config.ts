@@ -1,5 +1,11 @@
 import { routeConfig } from "./route-config";
 
+export const socialConfig = {
+  email: { label: "Email", href: "mailto:hello@recap.com" },
+  instagram: { label: "Instagram", href: "https://instagram.com" },
+  github: { label: "GitHub", href: "https://github.com" },
+};
+
 export const appConfig = {
   serviceName: "RECAP",
   serviceDisplayName: "RECAP©",
@@ -20,11 +26,7 @@ export const appConfig = {
     country: "Korea",
   },
   footer: {
-    links: [
-      { label: "Email", href: "mailto:hello@recap.com" },
-      { label: "Instagram", href: "https://instagram.com" },
-      { label: "GitHub", href: "https://github.com" },
-    ],
+    links: [socialConfig.email, socialConfig.instagram, socialConfig.github],
     copyright: `Copyright - ${new Date().getFullYear()} RECAP`,
   },
 } as const;

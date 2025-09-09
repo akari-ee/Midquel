@@ -1,3 +1,5 @@
+import { socialConfig } from "./app-config";
+
 export const mockConfig = {
   filmData: [
     {
@@ -494,4 +496,16 @@ export const mockConfig = {
       "Video 12 (Landscape 16:9)": "",
     },
   ],
+  profileData: {
+    name: "John Doe",
+    role: "Photographer & Developer",
+    info: "Let’s create something meaningful together. I’d love to hear about your project, big or small.",
+    contact: {
+      email: "recaap@gmail.com",
+      phone: "+8210 6577 7996",
+    },
+    social: [socialConfig.instagram, socialConfig.github],
+    image:
+      "https://framerusercontent.com/images/HFh5kLnilRLgrC1PZNvmx0PRRA.jpg?scale-down-to=2048&width=3746&height=5226",
+  },
 };

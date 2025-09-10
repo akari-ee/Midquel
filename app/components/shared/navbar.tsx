@@ -29,7 +29,8 @@ export default function Navbar({ initBg }: NavbarProps) {
       id="site-header"
       className={cn(
         `overflow-hidden px-6 py-5 fixed top-0 z-50 w-full duration-500 flex flex-col md:justify-between`,
-        menuOpen ? "bg-background" : hasBg ? "bg-background" : "bg-transparent",
+        hasBg ? "bg-background" : "bg-transparent",
+        menuOpen && "bg-background",
         initBg
       )}
       initial={{ height: 96 }}

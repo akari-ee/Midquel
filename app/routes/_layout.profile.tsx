@@ -11,16 +11,16 @@ export default function ProfileRoute() {
     <main className="w-full h-fit">
       <section
         id={handle.navTargetSectionId}
-        className="h-fit flex flex-col justify-center gap-10 px-5 pt-40 pb-10 md:flex-row md:gap-0 md:justify-between w-full md:h-dvh"
+        className="h-fit flex flex-col justify-center gap-10 px-5 pt-40 pb-10 lg:flex-row lg:gap-0 lg:justify-between w-full lg:h-dvh"
       >
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-6 basis-2/3">
           <h1 className="text-[40px] font-medium uppercase tracking-tighter md:text-[56px]">
             Profile
           </h1>
 
-          <div className="flex flex-col lg:flex-row lg:gap-16">
+          <div className="flex flex-col gap-6 xl:flex-row xl:gap-16">
             {/* Info */}
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2 basis-1/2">
               <h2 className="flex gap-2.5">
                 <span className="font-medium">
                   {mockConfig.profileData.name}.
@@ -29,7 +29,9 @@ export default function ProfileRoute() {
                   {mockConfig.profileData.role}
                 </span>
               </h2>
-              <p className="font-medium">{mockConfig.profileData.info}</p>
+              <p className="font-medium max-w-sm leading-tight">
+                {mockConfig.profileData.info}
+              </p>
             </div>
 
             {/* Social + Contact */}
@@ -67,7 +69,7 @@ export default function ProfileRoute() {
         </div>
 
         {/* Profile Image */}
-        <div className="md:h-1/2 md:w-xl md:ml-8 lg:h-2/3">
+        <div className="relative lg:w-xs lg:h-[40%] xl:w-1/3 xl:h-[50%]">
           <img
             src={mockConfig.profileData.image}
             alt={mockConfig.profileData.name}

@@ -39,7 +39,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="font-sans bg-background min-h-dvh antialiased relative">
         {children}
-        <ScrollRestoration />
+        <ScrollRestoration
+          getKey={(location) => {
+            // /film/:slug 상세 페이지에서는 스크롤 복원을 비활성화 (항상 상단으로)
+            if (location.pathname.startsWith("/film/")) {
+              return location.key; // 매 탐색마다 새로운 키 → 저장된 위치가 없어 항상 top
+            }
+            // 그 외 페이지는 기존 동작 유지 (공통 키 사용)
+            return "root";
+          }}
+        />
         <Scripts />
       </body>
     </html>

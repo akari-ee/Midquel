@@ -4,7 +4,7 @@ import { routeConfig } from "~/config/route-config";
 
 export default function ServiceLogo() {
   return (
-    <div className="p-5 font-semibold hover-text-muted-foreground flex-1">
+    <div className="font-semibold hover-text-muted-foreground flex-1 md:p-5">
       <Link to={routeConfig.HOME.href}>{appConfig.serviceDisplayName}</Link>
     </div>
   );

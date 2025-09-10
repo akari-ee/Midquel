@@ -28,7 +28,7 @@ export default function Navbar({ initBg }: NavbarProps) {
     <motion.header
       id="site-header"
       className={cn(
-        `overflow-hidden px-6 py-5 fixed top-0 z-50 w-full duration-500 `,
+        `overflow-hidden px-6 py-5 fixed top-0 z-50 w-full duration-500 flex flex-col md:justify-between`,
         menuOpen ? "bg-background" : hasBg ? "bg-background" : "bg-transparent",
         initBg
       )}
@@ -36,7 +36,7 @@ export default function Navbar({ initBg }: NavbarProps) {
       animate={{ height: menuOpen ? "100vh" : 96 }}
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
     >
-      <nav className="flex justify-between items-center text-[15px]">
+      <nav className="flex justify-between items-center text-[15px] p-5 md:p-0">
         {/* 좌측 로고 */}
         <ServiceLogo />
 
@@ -86,7 +86,7 @@ export default function Navbar({ initBg }: NavbarProps) {
       </nav>
 
       {/* 모바일 메뉴바 컨텐츠 */}
-      <aside>
+      <aside className="">
         <ul className="flex flex-col gap-2 p-5 uppercase">
           {appConfig.navItems.map(({ label, href }) => (
             <li key={href} className="text-5xl font-medium">

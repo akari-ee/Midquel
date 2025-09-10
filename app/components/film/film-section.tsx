@@ -19,7 +19,7 @@ export default function FilmSection() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-3">
         {mockConfig.filmData.map((item) => (
-          <FilmCard item={item} key={item.slug} />
+          <FilmCard item={item} key={item.Slug} isFixedHeight />
         ))}
       </div>
       <Link

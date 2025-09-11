@@ -9,7 +9,7 @@ export const handle = {
 
 export default function FilmIndexRoute() {
   return (
-    <main className="w-full min-h-dvh flex flex-col items-center">
+    <main className="w-full min-h-dvh flex flex-col items-center max-w-[1920px] mx-auto">
       <section
         id={handle.navTargetSectionId}
         className="pt-36 px-5 pb-10 **:tracking-tighter"

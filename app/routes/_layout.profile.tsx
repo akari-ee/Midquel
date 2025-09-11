@@ -8,7 +8,7 @@ export const handle = {
 
 export default function ProfileRoute() {
   return (
-    <main className="w-full h-fit">
+    <main className="w-full h-fit max-w-[1920px] mx-auto">
       <section
         id={handle.navTargetSectionId}
         className="h-fit flex flex-col justify-center gap-10 px-5 pt-40 pb-10 lg:flex-row lg:gap-0 lg:justify-between w-full lg:h-dvh"
@@ -69,7 +69,7 @@ export default function ProfileRoute() {
         </div>
 
         {/* Profile Image */}
-        <div className="relative lg:w-xs lg:h-[40%] xl:w-1/3 xl:h-[50%]">
+        <div className="relative lg:w-xs lg:h-[40%] xl:w-1/4 xl:h-[70%]">
           <img
             src={mockConfig.profileData.image}
             alt={mockConfig.profileData.name}

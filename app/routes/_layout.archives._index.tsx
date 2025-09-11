@@ -1,0 +1,40 @@
+import ArchiveCard from "~/components/archives/archive-card";
+import { Button } from "~/components/ui/button";
+import { mockConfig } from "~/config/mock-config";
+
+export const handle = {
+  navTargetSectionId: "archives-section",
+  navOffset: 0,
+};
+
+export default function ArchivesIndexRoute() {
+  return (
+    <main className="w-full min-h-dvh flex flex-col items-center max-w-[1920px] mx-auto">
+      <section
+        id={handle.navTargetSectionId}
+        className="pt-36 px-5 pb-10 **:tracking-tighter"
+      >
+        <div className="flex flex-col gap-5">
+          <h1 className="uppercase text-[64px] font-medium">The Archives</h1>
+          <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-x-3 gap-y-3">
+            {mockConfig.archivesData.map((item) => (
+              <ArchiveCard key={item.Slug} item={item} hoverable />
+            ))}
+            {/* {mockConfig.filmData.map((item) => (
+              <FilmCard item={item} key={item.Slug} />
+            ))} */}
+          </div>
+        </div>
+      </section>
+      <div>
+        <Button
+          variant={"secondary"}
+          className="text-sm font-light"
+          size={"sm"}
+        >
+          Load More
+        </Button>
+      </div>
+    </main>
+  );
+}

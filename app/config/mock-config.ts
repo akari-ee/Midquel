@@ -141,13 +141,13 @@ export const mockConfig = {
       Services: "digital,marketing-materials",
       Credits: "<p>Images generated with AI</p>",
       "Thumbnail Image (Portrait 4:5)":
-        "https://framerusercontent.com/images/WLJQduFa6kJyPUYts7PLBSvy2A.jpg",
+        "https://framerusercontent.com/images/vtTWbuKH7FC9Ewclc30meQkFA.jpg?width=3840&height=2160",
       "Thumbnail Image (Portrait 4:5):alt": "",
       "Thumbnail Video (Portrait 4:5)": "",
       "Thumbnail Video Poster (Portrait 4:5)": "",
       "Thumbnail Video Poster (Portrait 4:5):alt": "",
       "Featured Image (Landscape 16:9)":
-        "https://framerusercontent.com/images/vtTWbuKH7FC9Ewclc30meQkFA.jpg",
+        "https://framerusercontent.com/images/vtTWbuKH7FC9Ewclc30meQkFA.jpg?width=3840&height=2160",
       "Featured Image (Landscape 16:9):alt": "",
       "Image 1 (Portrait 4:5)":
         "https://framerusercontent.com/images/WLJQduFa6kJyPUYts7PLBSvy2A.jpg",

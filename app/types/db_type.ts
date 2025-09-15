@@ -136,32 +136,21 @@ export type Database = {
           href: string
           id: number
           label: string
-          profile_id: number | null
           type: Database["public"]["Enums"]["social_type"]
         }
         Insert: {
           href: string
           id?: number
           label: string
-          profile_id?: number | null
           type: Database["public"]["Enums"]["social_type"]
         }
         Update: {
           href?: string
           id?: number
           label?: string
-          profile_id?: number | null
           type?: Database["public"]["Enums"]["social_type"]
         }
-        Relationships: [
-          {
-            foreignKeyName: "social_link_profile_id_fkey"
-            columns: ["profile_id"]
-            isOneToOne: false
-            referencedRelation: "profile"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
     }
     Views: {

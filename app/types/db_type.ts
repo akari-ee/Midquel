@@ -58,7 +58,7 @@ export type Database = {
       }
       film: {
         Row: {
-          aperture: string | null
+          aperature: string | null
           camera: string | null
           date: string | null
           id: number
@@ -66,13 +66,13 @@ export type Database = {
           iso: string | null
           lens: string | null
           location: string | null
-          slug: string | null
+          slug: string
           speed: string | null
           title: string
           video: string | null
         }
         Insert: {
-          aperture?: string | null
+          aperature?: string | null
           camera?: string | null
           date?: string | null
           id?: number
@@ -80,13 +80,13 @@ export type Database = {
           iso?: string | null
           lens?: string | null
           location?: string | null
-          slug?: string | null
+          slug?: string
           speed?: string | null
           title: string
           video?: string | null
         }
         Update: {
-          aperture?: string | null
+          aperature?: string | null
           camera?: string | null
           date?: string | null
           id?: number
@@ -94,7 +94,7 @@ export type Database = {
           iso?: string | null
           lens?: string | null
           location?: string | null
-          slug?: string | null
+          slug?: string
           speed?: string | null
           title?: string
           video?: string | null

@@ -22,7 +22,7 @@ export default function FilmIndexRoute() {
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary onReset={reset} fallback={<div>Error</div>}>
-            <Suspense>
+            <Suspense fallback={<div>Loading</div>}>
               <SuspenseInfiniteQuery
                 {...filmQueryOptions.list(supabase, { page: 1 })}
               >

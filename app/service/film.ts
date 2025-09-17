@@ -36,6 +36,34 @@ export const fetchFilmDetail = async (
   return film;
 };
 
+export const fetchFilmNavigation = async (
+  supabase: SupabaseClient,
+  currentSlug: string
+): Promise<{ prev: Film | null; next: Film | null }> => {
+  // 이전 필름 조회 (ID가 현재보다 작은 것 중 가장 큰 것)
+  const { data: prevFilm } = await supabase
+    .from("film")
+    .select("*")
+    .lt("slug", currentSlug)
+    .order("slug", { ascending: false })
+    .limit(1)
+    .maybeSingle<Film>();
+
+  // 다음 필름 조회 (ID가 현재보다 큰 것 중 가장 작은 것)
+  const { data: nextFilm } = await supabase
+    .from("film")
+    .select("*")
+    .gt("slug", currentSlug)
+    .order("id", { ascending: true })
+    .limit(1)
+    .maybeSingle<Film>();
+
+  return {
+    prev: prevFilm,
+    next: nextFilm,
+  };
+};
+
 export const filmQueryOptions = {
   all: ["film"] as const,
   list: (
@@ -61,5 +89,10 @@ export const filmQueryOptions = {
     queryOptions({
       queryKey: [...filmQueryOptions.all, "detail", slug] as const,
       queryFn: () => fetchFilmDetail(supabase, slug),
+    }),
+  navigation: (supabase: SupabaseClient, currentSlug: string) =>
+    queryOptions({
+      queryKey: [...filmQueryOptions.all, "navigation", currentSlug] as const,
+      queryFn: () => fetchFilmNavigation(supabase, currentSlug),
     }),
 };

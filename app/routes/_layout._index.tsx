@@ -49,10 +49,7 @@ export default function Home() {
 
       {/* Archives + Film 컨테이너 - 앞 레이어, Hero를 덮으며 올라옴 */}
       <div className="relative z-10 flex flex-col w-full items-center bg-background mt-[100dvh] px-5 pt-10 pb-20">
-        {/* Archives Section */}
         <ArchivesSection />
-
-        {/* Film Section */}
         <FilmSection />
       </div>
     </main>

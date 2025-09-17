@@ -31,7 +31,6 @@ export default function ProfileRoute() {
                           Profile
                         </h1>
                         <div className="flex flex-col gap-6 xl:flex-row xl:gap-16">
-                          {/* Info */}
                           <div className="flex flex-col gap-2 basis-1/2">
                             <h2 className="flex gap-2.5">
                               <span className="font-medium">{data.name}.</span>
@@ -43,8 +42,6 @@ export default function ProfileRoute() {
                               {data.info}
                             </p>
                           </div>
-
-                          {/* Social + Contact */}
                           <div className="flex flex-col gap-10">
                             <div>
                               <h3 className="uppercase text-[#a6a6a6]">
@@ -81,8 +78,6 @@ export default function ProfileRoute() {
                           </div>
                         </div>
                       </div>
-
-                      {/* Profile Image */}
                       <div className="relative lg:w-xs lg:h-[40%] xl:w-1/4 xl:h-[70%]">
                         <img
                           src={data.image!}

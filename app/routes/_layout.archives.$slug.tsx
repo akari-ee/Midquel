@@ -24,7 +24,7 @@ export default function ArchiveDetailRoute() {
             onReset={reset}
             fallback={<div>Error loading archive</div>}
           >
-            <Suspense fallback={<div>Loading archive...</div>}>
+            <Suspense>
               <SuspenseQuery {...archiveQueryOptions.detail(supabase, slug!)}>
                 {({
                   data: {

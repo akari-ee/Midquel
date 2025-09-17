@@ -4,6 +4,7 @@ import { QueryErrorResetBoundary } from "@tanstack/react-query";
 import ArchiveCard from "~/components/archives/archive-card";
 import { Button } from "~/components/ui/button";
 import { createBrowserClient } from "~/config/supabase-config";
+import { SkeletonLoading } from "~/config/suspense-config";
 import { archiveQueryOptions } from "~/service/archive";
 
 export const handle = {
@@ -22,7 +23,7 @@ export default function ArchivesIndexRoute() {
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary onReset={reset} fallback={<div>Error</div>}>
-            <Suspense fallback={<div>Loading</div>}>
+            <Suspense fallback={<SkeletonLoading />}>
               <SuspenseInfiniteQuery
                 {...archiveQueryOptions.list(supabase, { page: 1 })}
               >

@@ -27,7 +27,7 @@ export default function FilmSection() {
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary onReset={reset} fallback={<div>Error loading films</div>}>
-            <Suspense fallback={<div>Loading films...</div>}>
+            <Suspense fallback={<div>Loading film...</div>}>
               <SuspenseQuery {...filmQueryOptions.featured(supabase)}>
                 {({ data: featuredFilms }) => (
                   <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-3">

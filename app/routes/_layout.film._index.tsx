@@ -4,6 +4,7 @@ import { QueryErrorResetBoundary } from "@tanstack/react-query";
 import FilmCard from "~/components/film/film-card";
 import { Button } from "~/components/ui/button";
 import { createBrowserClient } from "~/config/supabase-config";
+import { SkeletonLoading } from "~/config/suspense-config";
 import { filmQueryOptions } from "~/service/film";
 
 export const handle = {
@@ -22,7 +23,7 @@ export default function FilmIndexRoute() {
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary onReset={reset} fallback={<div>Error</div>}>
-            <Suspense fallback={<div>Loading</div>}>
+            <Suspense fallback={<SkeletonLoading />}>
               <SuspenseInfiniteQuery
                 {...filmQueryOptions.list(supabase, { page: 1 })}
               >

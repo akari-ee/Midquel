@@ -31,7 +31,7 @@ export default function ArchivesSection() {
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary onReset={reset} fallback={<div>Error loading archives</div>}>
-            <Suspense fallback={<div>Loading archives...</div>}>
+            <Suspense fallback={<div>Loading archive...</div>}>
               <SuspenseQuery {...archiveQueryOptions.featured(supabase)}>
                 {({ data: featuredArchives }) => (
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 gap-y-8 pb-16">

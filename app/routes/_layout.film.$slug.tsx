@@ -8,6 +8,7 @@ import { SuspenseQuery } from "@suspensive/react-query";
 import { filmQueryOptions } from "~/service/film";
 import { createBrowserClient } from "~/config/supabase-config";
 import { handle } from "./_layout.film._index";
+import { SkeletonLoading } from "~/config/suspense-config";
 
 export default function FilmDetailRoute() {
   const { slug } = useParams();
@@ -19,7 +20,7 @@ export default function FilmDetailRoute() {
         <QueryErrorResetBoundary>
           {({ reset }) => (
             <ErrorBoundary onReset={reset} fallback={<div>Error</div>}>
-              <Suspense fallback={<div>Loading</div>}>
+              <Suspense fallback={<SkeletonLoading />}>
                 <SuspenseQuery {...filmQueryOptions.detail(supabase, slug!)}>
                   {({ data: currentFilm }) => (
                     <section
@@ -32,6 +33,17 @@ export default function FilmDetailRoute() {
                             src={currentFilm.image}
                             alt={currentFilm.title}
                             className="w-full h-fit object-contain object-center"
+                          />
+                        )}
+                        {currentFilm.video && (
+                          <video
+                            src={currentFilm.video}
+                            preload="auto"
+                            className="cursor-auto w-full h-fit block object-cover bg-transparent object-center"
+                            autoPlay
+                            muted
+                            playsInline
+                            loop
                           />
                         )}
                       </div>

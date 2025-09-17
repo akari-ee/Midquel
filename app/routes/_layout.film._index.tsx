@@ -38,7 +38,7 @@ export default function FilmIndexRoute() {
                         ))}
                       </div>
                     </section>
-                    <div>
+                    <div className="pb-10">
                       <Button
                         variant={"secondary"}
                         className="text-sm font-light"

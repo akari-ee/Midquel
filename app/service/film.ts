@@ -1,14 +1,13 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
+import { apiConfig } from "~/config/api-config";
 import type { Film } from "~/types/model";
-
-const DEFAULT_PAGE_SIZE = 8;
 
 export const fetchFilmList = async (
   supabase: SupabaseClient,
   params: { page: number; pageSize?: number }
 ): Promise<Film[]> => {
-  const { page, pageSize = DEFAULT_PAGE_SIZE } = params;
+  const { page, pageSize = apiConfig.pageSize } = params;
   const from = (page - 1) * pageSize;
   const to = page + pageSize - 1;
 
@@ -20,6 +19,20 @@ export const fetchFilmList = async (
     .throwOnError();
 
   return filmList;
+};
+
+// 홈페이지용 필름 조회 (5개만)
+export const fetchFeaturedFilm = async (
+  supabase: SupabaseClient
+): Promise<Film[]> => {
+  const { data } = await supabase
+    .from("film")
+    .select("*")
+    .order("id", { ascending: true })
+    .limit(5)
+    .throwOnError();
+
+  return data ?? [];
 };
 
 export const fetchFilmDetail = async (
@@ -70,7 +83,7 @@ export const filmQueryOptions = {
     supabase: SupabaseClient,
     params: { page: number; pageSize?: number } = {
       page: 1,
-      pageSize: DEFAULT_PAGE_SIZE,
+      pageSize: apiConfig.pageSize,
     }
   ) =>
     infiniteQueryOptions({
@@ -80,10 +93,16 @@ export const filmQueryOptions = {
       initialPageParam: 1,
       getNextPageParam: (lastPage, _, lastPageParam) => {
         const hasMore =
-          Array.isArray(lastPage) && lastPage.length >= DEFAULT_PAGE_SIZE;
+          Array.isArray(lastPage) && lastPage.length >= apiConfig.pageSize;
         return hasMore ? lastPageParam + 1 : undefined;
       },
       select: (data) => data.pages.flat() as Film[],
+    }),
+  // 홈페이지 피처드용 (5개만)
+  featured: (supabase: SupabaseClient) =>
+    queryOptions({
+      queryKey: [...filmQueryOptions.all, "featured"] as const,
+      queryFn: () => fetchFeaturedFilm(supabase),
     }),
   detail: (supabase: SupabaseClient, slug: Film["slug"]) =>
     queryOptions({

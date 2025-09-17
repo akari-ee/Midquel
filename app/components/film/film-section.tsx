@@ -1,9 +1,15 @@
 import { Link } from "react-router";
-import { mockConfig } from "~/config/mock-config";
 import { routeConfig } from "~/config/route-config";
 import FilmCard from "./film-card";
+import { ErrorBoundary, Suspense } from "@suspensive/react";
+import { QueryErrorResetBoundary } from "@tanstack/react-query";
+import { SuspenseQuery } from "@suspensive/react-query";
+import { filmQueryOptions } from "~/service/film";
+import { createBrowserClient } from "~/config/supabase-config";
 
 export default function FilmSection() {
+  const supabase = createBrowserClient();
+
   return (
     <section className="w-full h-fit flex flex-col gap-5 pt-10">
       <div className="flex justify-between items-end uppercase w-full py-1">
@@ -17,11 +23,29 @@ export default function FilmSection() {
           See all films
         </Link>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-3">
-        {mockConfig.filmData.map((item) => (
-          <FilmCard item={item} key={item.Slug} isFixedHeight />
-        ))}
-      </div>
+      
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary onReset={reset} fallback={<div>Error loading films</div>}>
+            <Suspense fallback={<div>Loading films...</div>}>
+              <SuspenseQuery {...filmQueryOptions.featured(supabase)}>
+                {({ data: featuredFilms }) => (
+                  <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-3">
+                    {featuredFilms.map((item) => (
+                      <FilmCard 
+                        item={item} 
+                        key={item.slug} 
+                        isFixedHeight 
+                      />
+                    ))}
+                  </div>
+                )}
+              </SuspenseQuery>
+            </Suspense>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
+      
       <Link
         to={routeConfig.FILM.href}
         className="uppercase md:hidden underline hover:text-muted-foreground transition-colors duration-300 underline-offset-[6px] text-sm"

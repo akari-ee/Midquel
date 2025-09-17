@@ -3,9 +3,10 @@ import { routeConfig } from "~/config/route-config";
 import { ArrowUpRightIcon } from "lucide-react";
 import { useInView, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import type { Archive } from "~/types/model";
 
 interface ArchiveCardProps {
-  item: any;
+  item: Archive;
   hoverable?: boolean;
 }
 
@@ -44,20 +45,20 @@ export default function ArchiveCard({ item, hoverable }: ArchiveCardProps) {
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <Link key={item.Slug} to={routeConfig.ARCHIVES.detail(item.Slug)}>
+      <Link key={item.slug} to={routeConfig.ARCHIVES.detail(item.slug!)}>
         <div className="group flex flex-col gap-5 h-full relative">
           <div className="relative overflow-hidden w-full h-full">
             <img
-              src={item["Thumbnail Image (Portrait 4:5)"]}
-              alt={item["Thumbnail Image (Portrait 4:5):alt"]}
+              src={item.thumbnail_image}
+              alt={item.thumbnail_image}
               className="w-full h-full object-cover hover:scale-[1.025] transition-transform duration-[600ms] ease-in-out"
             />
           </div>
           {overlayMode === "none" ? (
             <div className="flex justify-between items-end gap-1">
               <div className="flex flex-col gap-1">
-                <h3 className="uppercase font-medium">{item.Title}</h3>
-                <p className="text-[#a6a6a6]">{item.Tagline}</p>
+                <h3 className="uppercase font-medium">{item.title}</h3>
+                <p className="text-[#a6a6a6]">{item.tagline}</p>
               </div>
               <aside>
                 <ArrowUpRightIcon className="stroke-1" />
@@ -74,8 +75,8 @@ export default function ArchiveCard({ item, hoverable }: ArchiveCardProps) {
                 }}
               />
               <div className={`absolute top-0 left-0 h-full w-full flex flex-col justify-end p-4 gap-1 z-10 transition-opacity duration-500 ease-in-out ${overlayMode === "hover" ? "opacity-0 group-hover:opacity-100" : "opacity-100"}`}>
-                <p className="truncate uppercase font-medium">{item.Title}</p>
-                <p className="truncate">{item.Tagline}</p>
+                <p className="truncate uppercase font-medium">{item.title}</p>
+                <p className="truncate">{item.tagline}</p>
               </div>
             </>
           )}

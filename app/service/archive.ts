@@ -46,7 +46,7 @@ export const fetchFeaturedArchive = async (
     .order("id", { ascending: true })
     .throwOnError();
 
-  return data ?? [];
+  return data;
 };
 
 export const archiveQueryOptions = {
@@ -77,9 +77,48 @@ export const archiveQueryOptions = {
       queryKey: [...archiveQueryOptions.all, "featured"] as const,
       queryFn: () => fetchFeaturedArchive(supabase),
     }),
+  // 최신순 N개 (기본 3개) - 특정 slug 제외
+  latestExcluding: (
+    supabase: SupabaseClient,
+    params: { excludeSlug: string; limit?: number }
+  ) =>
+    queryOptions({
+      queryKey: [
+        ...archiveQueryOptions.all,
+        "latestExcluding",
+        params.excludeSlug,
+        params.limit ?? 3,
+      ] as const,
+      queryFn: () =>
+        fetchLatestArchivesExcluding(supabase, {
+          excludeSlug: params.excludeSlug,
+          limit: params.limit ?? 3,
+        }),
+    }),
   detail: (supabase: SupabaseClient, slug: Archive["slug"]) =>
     queryOptions({
       queryKey: [...archiveQueryOptions.all, "detail", slug] as const,
       queryFn: () => fetchArchiveDetail(supabase, slug),
+      select: (data) => ({
+        ...data,
+        images: data.images as string[],
+      }),
     }),
+};
+
+// 최신순 N개 (기본 3개) - 특정 slug 제외
+export const fetchLatestArchivesExcluding = async (
+  supabase: SupabaseClient,
+  params: { excludeSlug: string; limit?: number }
+): Promise<Archive[]> => {
+  const { excludeSlug, limit = 3 } = params;
+  const { data } = await supabase
+    .from("archive")
+    .select("*")
+    .neq("slug", excludeSlug)
+    .order("id", { ascending: false })
+    .limit(limit)
+    .throwOnError();
+
+  return data;
 };

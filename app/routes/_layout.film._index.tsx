@@ -1,6 +1,10 @@
+import { ErrorBoundary, Suspense } from "@suspensive/react";
+import { SuspenseInfiniteQuery } from "@suspensive/react-query";
+import { QueryErrorResetBoundary } from "@tanstack/react-query";
 import FilmCard from "~/components/film/film-card";
 import { Button } from "~/components/ui/button";
-import { mockConfig } from "~/config/mock-config";
+import { createBrowserClient } from "~/config/supabase-config";
+import { filmQueryOptions } from "~/service/film";
 
 export const handle = {
   navTargetSectionId: "film-section",
@@ -8,28 +12,54 @@ export const handle = {
 };
 
 export default function FilmIndexRoute() {
+  const supabase = createBrowserClient();
+
   return (
     <main className="w-full min-h-dvh flex flex-col items-center max-w-[1920px] mx-auto">
-      <section
-        id={handle.navTargetSectionId}
-        className="pt-36 px-5 pb-10 **:tracking-tighter"
-      >
-        <div className="flex flex-col gap-5">
-          <h1 className="uppercase text-[64px] font-medium">The film</h1>
-          <div className="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-x-3 gap-y-3">
-            {mockConfig.filmData.map((item) => (
-              <FilmCard item={item} key={item.Slug} />
-            ))}
-          </div>
-        </div>
-      </section>
-      <div>
-        <Button variant={"secondary"} className="text-sm font-light" size={'sm'}>
-          Load More
-        </Button>
-      </div>
+      <h1 className="pt-36 uppercase text-[64px] font-medium w-full px-5 mb-5">
+        The film
+      </h1>
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary onReset={reset} fallback={<div>Error</div>}>
+            <Suspense>
+              <SuspenseInfiniteQuery
+                {...filmQueryOptions.list(supabase, { page: 1 })}
+              >
+                {({ data, fetchNextPage, hasNextPage, isFetchingNextPage }) => (
+                  <>
+                    <section
+                      id={handle.navTargetSectionId}
+                      className="px-5 pb-10 **:tracking-tighter"
+                    >
+                      <div className="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-x-3 gap-y-3">
+                        {data.map((item) => (
+                          <FilmCard key={item.slug} item={item} />
+                        ))}
+                      </div>
+                    </section>
+                    <div>
+                      <Button
+                        variant={"secondary"}
+                        className="text-sm font-light"
+                        size={"sm"}
+                        onClick={() => fetchNextPage()}
+                        disabled={isFetchingNextPage || !hasNextPage}
+                      >
+                        {isFetchingNextPage
+                          ? "Loading..."
+                          : hasNextPage
+                            ? "Load More"
+                            : "No More"}
+                      </Button>
+                    </div>
+                  </>
+                )}
+              </SuspenseInfiniteQuery>
+            </Suspense>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
     </main>
   );
 }
-
-

@@ -1,15 +1,16 @@
 import { Link } from "react-router";
 import { routeConfig } from "~/config/route-config";
 import { cn } from "~/lib/utils";
+import type { Film } from "~/types/model";
 
 interface FilmCardProps {
-  item: any;
+  item: Film;
   isFixedHeight?: boolean;
 }
 
 export default function FilmCard({ item, isFixedHeight }: FilmCardProps) {
   return (
-    <Link key={item.Slug} to={routeConfig.FILM.detail(item.Slug)}>
+    <Link key={item.slug} to={routeConfig.FILM.detail(item.slug!)}>
       <div
         className={cn(
           "group relative w-full flex flex-col gap-2.5",
@@ -19,17 +20,17 @@ export default function FilmCard({ item, isFixedHeight }: FilmCardProps) {
         {/* Image Container - 고정 높이로 브라우저 너비에 따라 이미지가 늘어남 */}
         <div className="relative w-full h-fit overflow-hidden">
           {/* Main Image - 브라우저 너비에 따라 자연스럽게 늘어나고 줄어듦 */}
-          {item.Image && (
+          {item.image && (
             <img
-              src={item.Image}
-              alt={item.Title}
+              src={item.image}
+              alt={item.title}
               className="w-full h-full object-cover object-center hover:scale-[1.025] transition-transform duration-[600ms] ease-in-out"
               loading="lazy"
             />
           )}
-          {item.Video && (
+          {item.video && (
             <video
-              src={item.Video}
+              src={item.video}
               preload="auto"
               className="cursor-auto w-full h-fit block object-cover bg-transparent object-center"
               autoPlay
@@ -39,7 +40,7 @@ export default function FilmCard({ item, isFixedHeight }: FilmCardProps) {
             />
           )}
         </div>
-        <div className="font-medium">{item.Title}</div>
+        <div className="font-medium">{item.title}</div>
       </div>
     </Link>
   );

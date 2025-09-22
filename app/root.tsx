@@ -14,6 +14,7 @@ import Providers from "./providers";
 import { routeConfig } from "./config/route-config";
 import Navbar from "./components/shared/navbar";
 import Footer from "./components/shared/footer";
+import { Analytics } from "@vercel/analytics/react";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -32,8 +33,8 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap"
-  }
+    href: "https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap",
+  },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -46,6 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="bg-background min-h-dvh antialiased relative font-pretendard">
+        <Analytics />
         {children}
         <ScrollRestoration
           getKey={(location) => {

@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
+import { format } from "date-fns";
 import { apiConfig } from "~/config/api-config";
 import type { Film } from "~/types/model";
 
@@ -108,6 +109,10 @@ export const filmQueryOptions = {
     queryOptions({
       queryKey: [...filmQueryOptions.all, "detail", slug] as const,
       queryFn: () => fetchFilmDetail(supabase, slug),
+      select: (data) => ({
+        ...data,
+        date: format(data.date!, "MMM dd, yyyy"),
+      }),
     }),
   navigation: (supabase: SupabaseClient, currentSlug: string) =>
     queryOptions({

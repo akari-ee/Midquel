@@ -48,7 +48,7 @@ export default function FilmDetailRoute() {
                         )}
                       </div>
                       <div className="w-5/6 flex flex-col gap-4 max-w-full">
-                        <h1 className="text-[40px] md:text-[56px] lg:text-[64px] font-medium">
+                        <h1 className="text-[40px] md:text-[56px] lg:text-[64px] font-medium font-dokdo">
                           {currentFilm.title}
                         </h1>
                         <div className="flex flex-col gap-2.5">
@@ -101,7 +101,7 @@ export default function FilmDetailRoute() {
                   {...filmQueryOptions.navigation(supabase, slug!)}
                 >
                   {({ data: navigation }) => (
-                    <div className="w-5/6 flex items-center justify-between text-2xl font-medium md:text-3xl xl:text-4xl tracking-tighter">
+                    <div className="w-5/6 flex items-center justify-between text-2xl font-medium md:text-3xl xl:text-4xl tracking-tighter font-dokdo">
                       <aside>
                         {navigation.prev && (
                           <Link

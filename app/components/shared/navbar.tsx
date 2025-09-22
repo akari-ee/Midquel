@@ -6,6 +6,7 @@ import { useNavbarBgOnSection } from "~/hooks/useNavbarBgOnSection";
 import ServiceLogo from "./service-logo";
 import { motion } from "motion/react";
 import { cn } from "~/lib/utils";
+import { formatInTimeZone } from "date-fns-tz";
 
 interface NavbarProps {
   initBg?: string;
@@ -111,11 +112,13 @@ export default function Navbar({ initBg }: NavbarProps) {
 }
 
 function Clock() {
-  const [time, setTime] = useState(format(new Date(), "HH:mm:ss"));
+  const [time, setTime] = useState(
+    formatInTimeZone(new Date(), "Asia/Seoul", "HH:mm:ss")
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTime(format(new Date(), "HH:mm:ss"));
+      setTime(formatInTimeZone(new Date(), "Asia/Seoul", "HH:mm:ss"));
     }, 1000);
 
     return () => clearInterval(interval);

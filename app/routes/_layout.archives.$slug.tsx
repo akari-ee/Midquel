@@ -43,11 +43,11 @@ export default function ArchiveDetailRoute() {
                       id="hero-section"
                       className="pt-40 px-5 flex flex-col gap-4 w-full items-center h-fit"
                     >
-                      <header className="w-full flex flex-col lg:flex-row lg:justify-between lg:items-end">
-                        <h1 className="uppercase font-medium text-[40px] lg:text-[56px] xl:text-[64px] leading-tight">
+                      <header className="w-full flex flex-col lg:flex-row lg:justify-between lg:items-end font-dokdo">
+                        <h1 className="uppercase font-medium text-5xl lg:text-[56px] xl:text-7xl leading-tight">
                           {title}
                         </h1>
-                        <p className="text-[#a6a6a6] text-balance font-medium">
+                        <p className="text-[#a6a6a6] text-balance font-medium text-3xl">
                           {tagline}
                         </p>
                       </header>

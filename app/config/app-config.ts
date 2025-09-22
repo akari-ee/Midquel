@@ -1,20 +1,20 @@
 import { routeConfig } from "./route-config";
 
 export const socialConfig = {
-  email: { label: "Email", href: "mailto:hello@recap.com" },
+  email: { label: "Email", href: "mailto:hello@email.com" },
   instagram: { label: "Instagram", href: "https://instagram.com" },
   github: { label: "GitHub", href: "https://github.com" },
 };
 
 export const appConfig = {
-  serviceName: "RECAP",
-  serviceDisplayName: "RECAP©",
+  serviceName: "Midquel",
+  serviceDisplayName: "Midquel©",
   serviceDescription:
-    "RECAP is a platform for film lovers to share their thoughts and opinions on films.",
+    "A space to look, slowly and deeply.",
   serviceUrl: "https://recap.com",
   bannerImage:
     "https://framerusercontent.com/images/mUkxezOznrwDZY5wiJqPMLwCVSI.jpg?width=3888&height=5184",
-  logoAlt: "Recap Logo",
+  logoAlt: "Service Logo",
   navItems: [
     routeConfig.HOME,
     routeConfig.FILM,
@@ -27,6 +27,6 @@ export const appConfig = {
   },
   footer: {
     links: [socialConfig.email, socialConfig.instagram, socialConfig.github],
-    copyright: `Copyright - ${new Date().getFullYear()} RECAP`,
+    copyright: `Copyright - ${new Date().getFullYear()} Midquel`,
   },
 } as const;

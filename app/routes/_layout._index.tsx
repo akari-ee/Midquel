@@ -37,13 +37,13 @@ export default function Home() {
 
         {/* Title + Description */}
         <BlurScaleOnScroll
-          className="absolute bottom-0 left-0 w-full h-full pb-20 pl-10 lg:pl-20 flex flex-col gap-5 justify-end"
+          className="absolute bottom-0 left-0 w-full h-full pb-20 pl-10 lg:pl-20 flex flex-col gap-3 justify-end font-dokdo"
           blurSpeed={0.1}
         >
           <h1 className="text-6xl font-medium lg:text-9xl lg:font-normal tracking-tighter">
             {appConfig.serviceName}
           </h1>
-          <p className="px-0 lg:px-2">{appConfig.serviceDescription}</p>
+          <p className="px-0 lg:px-2 text-4xl">{appConfig.serviceDescription}</p>
         </BlurScaleOnScroll>
       </section>
 
